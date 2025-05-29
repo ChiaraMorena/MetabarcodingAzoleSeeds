@@ -132,10 +132,11 @@ rule feature_filtered_by_freq:
 
 rule assign:
     input:
-        table = os.path.join(base_directory, 'Analysis', 'filtered-feature.qza'),
-        classifier = os.path.join(classifier_directory, 'unite_ver10_97_04.04.2024-Q2-2024.5.qza')
+        table = os.path.join(base_directory, 'Analysis', 'feature.qza'),
+        #classifier = os.path.join(classifier_directory, 'unite_ver10_97_04.04.2024-Q2-2024.5.qza')
+        classifier = os.path.join(classifier_directory, 'unite_ver10_dynamic_04.04.2024-Q2-2024.5.qza')
     output:
-        taxonomy = os.path.join(analysis_directory, 'taxonomy97_fil.qza')
+        taxonomy = os.path.join(analysis_directory, 'taxonomy_din.qza')
     shell:
         """
         qiime feature-classifier classify-sklearn \
@@ -146,12 +147,12 @@ rule assign:
 
 rule boxplot:
     input:
-        seq = os.path.join(base_directory, 'Analysis', 'filtered-feature-table.qza'),
-        ref = os.path.join(analysis_directory, 'taxonomy97_fil.qza'),
+        seq = os.path.join(base_directory, 'Analysis', 'feature_table.qza'),
+        ref = os.path.join(analysis_directory, 'taxonomy_din.qza'),
         #meta = os.path.join(data_directory, 'manifest_v2.tsv')
         meta = os.path.join(meta_directory, 'manifest_v2.tsv')
     output:
-        boxplot = os.path.join(analysis_directory, 'taxa_boxplot97_fil.qzv')
+        boxplot = os.path.join(analysis_directory, 'taxa_boxplot_din.qzv')
     shell:
         """
         qiime taxa barplot \
