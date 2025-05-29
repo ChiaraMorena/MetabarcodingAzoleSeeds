@@ -174,4 +174,3 @@ cython_debug/
 *.fastq.gz
 *.biom
 *.zip
-*.html
